@@ -36,8 +36,6 @@ Homework 1}}
 \begin{itemize}[itemsep=-7pt]
 	\item Please turn in a single PDF file.
 	\item Please share a link to your code, but do not attach the actual code. 
-	\item {\color{blue} By the way, if you don't have a github, why not make one? It's easy to do, and a great place to stash your code and link to it. Pop by office hours or phone a friend if you need help. It's never too early (or late) to learn!} 
-	\item Handwritten math (scanned and included in a PDF) is fine, but please avoid 10MB+ file sizes! Reduce your image quality as needed. 
 	\item Don't forget to list anyone you collaborated with. 
 \end{itemize}
 \vspace{0.1in}\hrule
@@ -46,13 +44,18 @@ Homework 1}}
 
 \item The goal of this problem is to get you over any barriers with (i) getting Python set up, (ii), getting the SIR model implemented in a Forward Euler solver, and (iii) getting matplotlib set up.
 	
-	Write a function in Python that uses the Forward Euler method to simulate the SIR model {\it in which the population is slowly growing}.\footnote{Not to be turned in, but consider checking your work by first reproducing the three plots from Figure 1 of the Week 2 lecture notes in the absence of population growth. The parameters are: $N=1000$, $I_0=1$, $S_0=999$, with $\beta=1$, $\gamma=0.5$, then $\beta = 1.5$, $\gamma=0.5$, and finally $\beta = 2$, $\gamma=0.5$}
-	
+	Write a function in Python that uses the Forward Euler method to simulate the SIR model {\it in which the population is slowly growing}.
 	In your simulations, suppose that we have an initial population of size $N=1000$, with $I_0=1$, $S_0=999$. Suppose that $\beta=1$, $\gamma=0.5$, and then $\mu_{\text{birth}}=0.01$ and $\mu_{\text{death}} = \tfrac{1}{2} \mu_\text{birth}$. 
 	
 	Produce a single plot that captures the dynamics of transmission over the appropriate amount of time for the population to grow by 50\% to a total of $N=1500$. Be sure to include a legend and your name in the title of the plot.
 	
+% image scaled to fit on the current page
+\begin{center}
+  \includegraphics[width=0.9\textwidth, height=0.6\textheight, keepaspectratio]{births-and-deaths.png}
+\end{center}
+
 \clearpage
+
 \item The goal of this problem is to show an important fact about transition rates in compartmental models. It is also a good chance to become refreshed on simple ODE solving and separation of variables. Finally, it makes good on a promise made in lecture notes to ask this homework question!
 	
 	Imagine that we are interested in SIR dynamics, but everyone starts out either infected or recovered, and no one starts out susceptible.
