@@ -32,7 +32,7 @@
 
 \lhead{{\bf Mathematical \& Computational Modeling of Infectious Diseases \\ 
 Homework 1}}
-\rhead{{\bf D.B.\ Larremore\\2025}}
+\rhead{{\bf Jason Hunter\\2025}}
 \renewcommand{\headrulewidth}{0.4pt}
 
 {\bf Instructions:} 
@@ -46,9 +46,9 @@ Homework 1}}
 \begin{enumerate}
 
 \item The goal of this problem is to get you over any barriers with 
-(i) getting Python set up, 
-(ii) getting the SIR model implemented in a Forward Euler solver, and
-(iii) getting matplotlib set up.
+	  (i) getting Python set up, 
+	  (ii) getting the SIR model implemented in a Forward Euler solver, and
+	  (iii) getting matplotlib set up.
 
 Write a function in Python that uses the Forward Euler method to simulate the SIR model {\it
 in which the population is slowly growing}.
@@ -58,7 +58,8 @@ $\beta=1$, $\gamma=0.5$,
 and then
 $\mu_{\text{birth}}=0.01$
 and
-$\mu_{\text{death}} = \tfrac{1}{2} \mu_\text{birth}$
+$\mu_{\text{death}} = \tfrac{1}{2} \mu_\text{birth}$.
+
 
 Produce a single plot that captures the dynamics of transmission over the appropriate amount of time
 for the population to grow by 50\% to a total of $N=1500$.
@@ -72,12 +73,11 @@ Be sure to include a legend and your name in the title of the plot.
 \clearpage
 
 \item The goal of this problem is to show an important fact about transition rates in compartmental models.
-It is also a good chance to become refreshed on simple ODE solving and separation of variables.
-Finally, it makes good on a promise made in lecture notes to ask this homework question!
-	
-Imagine that we are interested in SIR dynamics,
-but everyone starts out either infected or recovered,
-and no one starts out susceptible.
+	  It is also a good chance to become refreshed on simple ODE solving and separation of variables.
+	  Finally, it makes good on a promise made in lecture notes to ask this homework question!
+	  Imagine that we are interested in SIR dynamics,
+	  but everyone starts out either infected or recovered,
+	  and no one starts out susceptible.
 \begin{enumerate}[label=\alph*.]
 	\item Use this information to simplify the typical equation for $\dot{I}$.
 		\begin{solution} \newline
@@ -117,8 +117,8 @@ and no one starts out susceptible.
 		\end{solution}
 
 	\item Discuss this equation. 
-			What does it do over time?
-			How is it related to the fraction of infected people who have {\it left} the infected class?
+		  What does it do over time?
+		  How is it related to the fraction of infected people who have {\it left} the infected class?
 		\begin{solution} \newline \newline
 			\textit{What does it do over time?} \\ \\
 				The equation $e^{-\gamma t}$ is essentially just exponential decay. \\
@@ -129,11 +129,11 @@ and no one starts out susceptible.
 		\end{solution}
 			
 	\item This formula produces values between 0 and 1,
-	and it tells us the probability that a randomly chosen infected person is still infected at time $t$.
-	How does this relate to the cumulative distribution function (CDF) 
-	that describes the probability that someone is infected for less than or equal to $t$ units of time? 
-	Take a derivative of the CDF to get a PDF for the duration of infection lengths is. 
-	Then, find out what this famous probability distribution is called, and write down its expected value.
+		  and it tells us the probability that a randomly chosen infected person is still infected at time $t$.
+		  How does this relate to the cumulative distribution function (CDF) 
+		  that describes the probability that someone is infected for less than or equal to $t$ units of time? 
+		  Take a derivative of the CDF to get a PDF for the duration of infection lengths is. 
+		  Then, find out what this famous probability distribution is called, and write down its expected value.
 		\begin{solution} \newline \newline
 			Given that the formula $e^{-\gamma t}$ is representative of the probability that a randomly chosen infected person is still infected at time t.
 			The CDF, which describes the probability that someone is infected for less than or equal to $t$ units of time, is the complement of this formula:
@@ -166,22 +166,50 @@ and no one starts out susceptible.
 \end{enumerate}
 
 \clearpage
-\item The goal of this problem is to (i) figure out how to solve the final epidemic size equation, and (ii) test the equation's predictions.
+
+\item The goal of this problem is to 
+	  (i) figure out how to solve the final epidemic size equation, and 
+	  (ii) test the equation's predictions.
 
 	\begin{enumerate}[label=\alph*.]
 		\item First, explain how an epidemic's total size, also called its cumulative incidence, is related to $s_\infty$ and $r_\infty$. 
+			\begin{solution} \newline \newline
+				I'm going to finish this tomorrow with the group. \\
+			\end{solution}
 		\item Recall that 
 		\begin{equation}r_\infty = 1-e^{-R_0 r_\infty}\label{myeq}\end{equation} 
-		Though we can't solve this equation, we can use a valuable graphical technique as follows. First, we define a function $f(r_\infty) = r_\infty$ and define a second function $g(r_\infty) = 1-e^{-R_0 r_\infty}$. Note that $f$ is the left hand side of Eq.~\eqref{myeq}, while $g$ is the right hand side. This allows us to plot $f$ and plot $g$, both as a function of $r_\infty$, to see where they cross---that is, where $f=g$. 
+		Though we can't solve this equation, we can use a valuable graphical technique as follows. 
+		First, we define a function $f(r_\infty) = r_\infty$ and define a second function $g(r_\infty) = 1-e^{-R_0 r_\infty}$. 
+		Note that $f$ is the left hand side of Eq.~\eqref{myeq}, while $g$ is the right hand side. 
+		This allows us to plot $f$ and plot $g$, both as a function of $r_\infty$, to see where they cross---that is, where $f=g$. 
 		
-		Create four plots for $R_0 \in \{0.9, 1.0, 1.1, 1.2\}$ with $f$ in black and $g$ in red. Use the {\bf fsolve} function to find the intersection point, and use matplotlib's {\bf scatter} function to plot a blue circle at the intersection.\footnote{Hint, use \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fsolve.html}{the fsolve docs}, and note that, because fsolve wants to find roots (points where a function is zero), you can create an auxiliary function $h(r_\infty) = f(r_\infty)-g(r_\infty)$ which will be equal to zero at the point where $f$ and $g$ intersect!}
-		\item Comment on what you see in the plots in the context of what we have learned about $R_0$. What do you see in your figures? What happens when $R_0 < 1$ ?
+		Create four plots for $R_0 \in \{0.9, 1.0, 1.1, 1.2\}$ with $f$ in black and $g$ in red. 
+		Use the {\bf fsolve} function to find the intersection point, and use matplotlib's {\bf scatter} function to plot a blue circle at the intersection. \footnote{Hint, use \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fsolve.html}{the fsolve docs}, 
+		and note that, because fsolve wants to find roots (points where a function is zero), 
+		you can create an auxiliary function $h(r_\infty) = f(r_\infty)-g(r_\infty)$ 
+		which will be equal to zero at the point where $f$ and $g$ intersect!}
+			\begin{solution}
+				See my graph on the following page.
+			\end{solution}
+		\begin{center}
+		  \includegraphics[width=0.9\textwidth, height=0.6\textheight, keepaspectratio]{final_size_plots.png}
+		\end{center}
+
+		
+		\item Comment on what you see in the plots in the context of what we have learned about $R_0$. 
+		      What do you see in your figures? What happens when $R_0 < 1$?
 		\item Finally, test the predictions made by this final-size equation by using your SIR code and $\beta=1$, $\gamma=0.5$ by creating a new version of that epidemic with a green dotted line at the height of $r_\infty$. Does this final size prediction work?\footnote{Take care, as the units of our SIR plots and the units of our final size prediction are not the same! You may have to do a conversion...}
 	\end{enumerate}
 	
 
 \clearpage
-\item (Grad / EC): In class, we showed that the SIR model's disease-free equilibrium is stable when $s<\tfrac{1}{R_0}$ and unstable otherwise. Using $N=10^6$, and $\varepsilon = \frac{1}{N}$ as your perturbation, produce a single figure {\it using your simulation code and its output} that illustrates this point. Write a caption that explains the principle of stability, and explain how your figure illustrates it.\footnote{There are many possible ways to make such a figure, and write its caption! One could use all of the outputs of the simulation, for instance, but one could also use just those that illustrate the intended point.}
+\item (Grad / EC): In class, we showed that the SIR model's disease-free equilibrium is stable when $s<\tfrac{1}{R_0}$ and unstable otherwise. 
+	  Using $N=10^6$, and $\varepsilon = \frac{1}{N}$ as your perturbation, 
+	  produce a single figure {\it using your simulation code and its output} that illustrates this point.
+	  Write a caption that explains the principle of stability, and explain how your figure illustrates it.
+\footnote{There are many possible ways to make such a figure, and write its caption! 
+One could use all of the outputs of the simulation, for instance, 
+but one could also use just those that illustrate the intended point.}
 
 \end{enumerate}
 
