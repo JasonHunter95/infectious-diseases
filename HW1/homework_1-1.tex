@@ -35,11 +35,10 @@ Homework 1}}
 \rhead{{\bf Jason Hunter\\2025}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-{\bf Instructions:} 
+{\bf Note:} 
 \begin{itemize}[itemsep=-7pt]
-	\item Please turn in a single PDF file.
-	\item Please share a link to your code, but do not attach the actual code. 
-	\item Don't forget to list anyone you collaborated with. 
+    \item My repository with the code I used: \href{https://github.com/JasonHunter95/infectious-diseases/tree/main/HW1}{HW1 repo}
+	\item I collaborated with Malia, Stas, and Apollo on this.
 \end{itemize}
 \vspace{0.1in}\hrule
 
@@ -86,7 +85,7 @@ Be sure to include a legend and your name in the title of the plot.
 		$$\dot{I} = \beta S I - \gamma I$$
 		Simplifiying with $S=0$ gives:
 			\begin{align*}
-			\dot{I} &= \beta (0) I - \gamma I \\
+			\dot{I} &= \beta \cdot 0 \cdot I - \gamma I \\
 			\dot{I} &= - \gamma I
 			\end{align*}
 		\end{solution}
@@ -126,6 +125,8 @@ Be sure to include a legend and your name in the title of the plot.
 				In other words, the epidemic is dying out over time. \\ \\
 			\textit{How is it related to the fraction of infected people who have left the infected class?} \\ \\
 				It is the complement to the fraction of initially infected people who have left the I class.
+				So if $e^{-\gamma t}$ is the fraction still infected at time $t$, then
+				$1 - e^{-\gamma t}$ is the fraction who have left the infected class by time $t$.
 		\end{solution}
 			
 	\item This formula produces values between 0 and 1,
@@ -174,7 +175,12 @@ Be sure to include a legend and your name in the title of the plot.
 	\begin{enumerate}[label=\alph*.]
 		\item First, explain how an epidemic's total size, also called its cumulative incidence, is related to $s_\infty$ and $r_\infty$. 
 			\begin{solution} \newline \newline
-				I'm going to finish this tomorrow with the group. \\
+				The total/final size of an epidemic is related to $s_\infty$ and $r_\infty$ because these values represent the fractions
+				of the population who are either susceptible or recovered following the conclusion of an epidemic. \\
+				So in a population without births and deaths, given that $s_\infty + r_\infty = 1$,
+				the cumulative incidence can be modeled as:
+				$$1 - s_\infty = r_\infty$$
+				or the fraction of the population that did get infected out of the whole.
 			\end{solution}
 		\item Recall that 
 		\begin{equation}r_\infty = 1-e^{-R_0 r_\infty}\label{myeq}\end{equation} 
@@ -198,7 +204,21 @@ Be sure to include a legend and your name in the title of the plot.
 		
 		\item Comment on what you see in the plots in the context of what we have learned about $R_0$. 
 		      What do you see in your figures? What happens when $R_0 < 1$?
+			\begin{solution} \newline \newline
+				When $R_0 < 1$, the two functions only appear to intersect at the origin. \\
+				This makes sense, because in any case where $R_0 < 1$, it means that $\beta < \gamma$,
+				so less than one new person is infected by each infected person on average. \\
+				When $R_0 > 1$, the intersection point happens further and further away from the origin as $R_0$ increases. \\
+				This indicates a greater final size of the epidemic. \\
+			\end{solution}
 		\item Finally, test the predictions made by this final-size equation by using your SIR code and $\beta=1$, $\gamma=0.5$ by creating a new version of that epidemic with a green dotted line at the height of $r_\infty$. Does this final size prediction work?\footnote{Take care, as the units of our SIR plots and the units of our final size prediction are not the same! You may have to do a conversion...}
+			\begin{solution} \newline \newline
+				Yes, the final size prediction does work. \\
+				In my simulation with $\beta = 1$ and $\gamma = 0.5$, I got a final size of $r_\infty = 0.7986$.
+			\end{solution}
+			\begin{center}
+			  \includegraphics[width=0.9\textwidth, height=0.6\textheight, keepaspectratio]{final-size-test.png}
+			\end{center}
 	\end{enumerate}
 	
 
