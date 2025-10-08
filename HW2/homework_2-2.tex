@@ -23,6 +23,9 @@
 
 \graphicspath{{../Notes/PythonFigs/}{./}}
 
+% styling for solution blocks
+\newenvironment{solution}{\par\noindent\begingroup\color{BrickRed}\textbf{Solution:} }{\par\endgroup}
+
 \newcommand{\e}{\mathrm{e}}
 \renewcommand{\d}{\mathrm{d}}
 \newcommand{\erf}{\mathop\mathrm{erf}}
@@ -51,11 +54,56 @@ Homework 2}}
 	\item The goal of this problem is to develop flexibility with your Forward Euler code, and to learn a bit about the effect of step size on the accuracy of the solution.
 	
 \begin{enumerate}[label=\alph*.]
-	\item Using your Forward Euler method, simulate the solution to the {\it normalized} SIS model discussed in class (Week 3) using $\beta=3$ and $\gamma=2$, and with $(s_0, i_0) = (0.99, 0.01)$. Create three plots ranging from $t=0$ to $t=25$. On the first, simulate using a step size $\Delta t=2$. On the second, use $\Delta t =1$. On the third, use $\Delta t = \tfrac{1}{2}$. In each plot, show only your solution's $I(t)$ in a red solid line, labeled as ``Forward Euler'', and then also plot the analytical solution from class in a black dashed line, labeled as ``Analytical.'' Please also set the y-axis range to $[0,0.5]$. 
+
+	\item Using your Forward Euler method, simulate the solution to the {\it normalized} SIS model discussed in class (Week 3) using $\beta=3$ and $\gamma=2$, and with $(s_0, i_0) = (0.99, 0.01)$.
+	 Create three plots ranging from $t=0$ to $t=25$. On the first, simulate using a step size $\Delta t=2$.
+	 On the second, use $\Delta t =1$. On the third, use $\Delta t = \tfrac{1}{2}$. 
+	 In each plot, show only your solution's $I(t)$ in a red solid line, labeled as ``Forward Euler'', and then also plot the analytical solution from class in a black dashed line, labeled as ``Analytical.''
+	 Please also set the y-axis range to $[0,0.5]$. 
+
+	\begin{solution}
+	 These are the plots for the given step sizes:
+	 \begin{center}
+		\includegraphics[width=0.8\textwidth]{SIS-simulation.png}
+	 \end{center}
+	\end{solution}
+
 	\item Comment on what you see in your three plots. How does the step size affect our solution?
-	\item Define the maximum absolute error for a simulation using a particular $\Delta t$ as $$E(\Delta t) = \max_{t} \big | I_{\text{Euler}, \Delta t} (t) - I_\text{analytical}(t) \big |\ .$$ Write a function that runs the appropriate simulation, computes the analytical solution, and returns $E$ without plotting. Share a link to your code for this problem.
-	\item Create a plot on log-log axes showing $E(\Delta t)$ vs $\Delta t$ for values $$\Delta t \in \{2,1,\tfrac{1}{2},\tfrac{1}{4},\tfrac{1}{8},\tfrac{1}{16},\tfrac{1}{32}\}$$
-	\item Comment on what you observe in this plot, and comment on cases when you would want a larger or smaller step size, and why? Imagining yourself in an advisory position in your community, can you think of any scenario where there is a connection between the step size of your simulation and the ethics of your advice?
+
+	\begin{solution}
+		What I notice here is that the smaller the step size, the more accurate the simulation is. 
+		The largest step size of 2 showed a curve with much more variance than the analytical solution.
+		With each decrease in step size, the curves converge more and more towards each other.
+	\end{solution}
+
+	\item Define the maximum absolute error for a simulation using a particular $\Delta t$ as 
+	$$E(\Delta t) = \max_{t} \big | I_{\text{Euler}, \Delta t} (t) - I_\text{analytical}(t) \big |\ .$$ 
+	Write a function that runs the appropriate simulation, computes the analytical solution, and returns $E$ without plotting. 
+	Share a link to your code for this problem.
+
+	\begin{solution}
+		\href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW2/homework_2.ipynb} {My code for problem 1C}
+	\end{solution}
+
+	\item Create a plot on log-log axes showing $E(\Delta t)$ vs $\Delta t$ for values 
+	$$\Delta t \in \{2,1,\tfrac{1}{2},\tfrac{1}{4},\tfrac{1}{8},\tfrac{1}{16},\tfrac{1}{32}\}$$
+
+	\begin{solution}
+		\begin{center}
+			\includegraphics[width=0.8\textwidth]{log-log-error-plot.png}
+		\end{center}
+	\end{solution}
+
+	\item Comment on what you observe in this plot, and comment on cases when you would want a larger or smaller step size, and why?
+	 Imagining yourself in an advisory position in your community, 
+	 can you think of any scenario where there is a connection between the step size of your simulation and the ethics of your advice?
+		
+	\begin{solution}
+		The maximum absolute error $E(\Delta t)$ tends to decrease as the step size $\Delta t$ decreases. 
+		This further supports what I saw earlier that smaller step sizes lead to more accurate simulations.
+
+	\end{solution}
+
 \end{enumerate}
 
 \clearpage
