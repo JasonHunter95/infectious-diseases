@@ -39,7 +39,7 @@
 
 \lhead{{\bf Mathematical \& Computational Modeling of Infectious Diseases \\ 
 Homework 2}}
-\rhead{{\bf D.B.\ Larremore\\2025}}
+\rhead{{\bf Jason Hunter \\2025}}
 \renewcommand{\headrulewidth}{0.4pt}
 
 {\bf Instructions:} 
@@ -123,9 +123,97 @@ The second team, led by Flynn Uenza, tells you that there are $210$ faculty and 
 	$$
 Whom do you trust more, Dan Pemic or Flynn Uenza? To answer this question, consider the self-consistency (or lack thereof) of each dataset. Explain your reasoning in words and include any calculations used to arrive at your conclusions. 
 
-\item A straightforward fix to self-consistency issues is to ``symmetrize'' the rates. First, we compute the implied total number of intergroup contacts from faculty to students, and then compute the same from students to faculty. After averaging those two counts, divide by the appropriate population size to get per-person rates. Use this approach to symmetrize the two contact matrices. 
+\begin{solution}
+This can be checked by seeing if the number of contacts from faculty to students is about equal to the number of contacts from students to faculty. 
+Mathematically this is as follows:
+$$n_F c_{F\to S} \approx n_S c_{S\to F}$$
+Pemic: \\
+$n_F = 200$ \\
+$n_S = 1800$.
 
-\item How different are these two symmetrized matrices, really? Answer the question by computing the ratio of $R_0$ under Pemic's data to $R_0$ under Uenza's data, assuming SIR models with otherwise identical parameters.
+Totals: $200 \cdot 43.5 = 8700$ vs. $1800 \cdot 4.7 = 8460$.
+
+Mismatch $ = 8700 / 8460 - 1 \approx 2.83 \%$. \\
+
+Uenza: \\
+$n_F = 210$ \\
+$n_S = 1750$.
+
+Totals: $210 \cdot 44.5 = 9345$ vs. $1750 \cdot 4.8 = 8400$.
+
+Mismatch $ = 9345 / 8400 - 1 \approx 11.25 \%$. \\
+
+Given this information, and comparing the error rates, I would say that Pemic's data is more self-consistent and by extension more trustworthy as well.
+\end{solution}
+
+\item A straightforward fix to self-consistency issues is to ``symmetrize'' the rates. First, we compute the implied total number of intergroup contacts from faculty to students, and then compute the same from students to faculty. After averaging those two counts, divide by the appropriate population size to get per-person rates. Use this approach to symmetrize the two contact matrices. 
+\begin{solution}
+Symmetrize only off-diagonals using: 
+$$A=\frac{n_F c_{F\to S} + n_S c_{S\to F}}{2}$$
+Then:
+$$c'_{F\to S}=\frac{A}{n_F}$$
+$$c'_{S\to F}=\frac{A}{n_S}$$
+
+Keep diagonals unchanged.
+
+Pemic: \\
+$$A=\frac{200\cdot 43.5 + 1800\cdot 4.7}{2}=\frac{8700+8460}{2}=8580$$
+Then: 
+$$c'_{F\to S}=\frac{8580}{200}=42.9$$
+$$c'_{S\to F}=\frac{8580}{1800}=4.766\overline{6}$$
+
+$$
+C^\text{sym}_\text{Pemic}=
+\begin{pmatrix}
+3.1 & 42.9 \\
+4.7667 & 25.0
+\end{pmatrix}
+$$
+
+Uenza: \\
+$$A=\frac{210\cdot 44.5 + 1750\cdot 4.8}{2}=\frac{9345+8400}{2}=8872.5$$
+Then:
+$$c'_{F\to S}=\frac{8872.5}{210}=42.25$$ 
+$$c'_{S\to F}=\frac{8872.5}{1750}=5.07$$
+
+$$
+C^\text{sym}_\text{Uenza}=
+\begin{pmatrix}
+3.0 & 42.25 \\
+5.07 & 25.1
+\end{pmatrix}
+$$
+
+These now are the symmetrized contact matrices.
+\end{solution}
+
+\item How different are these two symmetrized matrices, really?
+Answer the question by computing the ratio of $R_0$ under Pemic's data to $R_0$ under Uenza's data,
+assuming SIR models with otherwise identical parameters.
+
+\begin{solution}
+With identical parameters,
+$R_0$ is proportional to the dominant eigenvalue in the contact matrix.
+In other words, $R_0$ is the ratio of the two dominant eigenvalues of the two symmetrized matrices.
+
+Given a $2\times 2$ matrix:
+$$\left(\begin{pmatrix}a & b \\ c & d\end{pmatrix}\right)$$
+The dominant eigenvalue is:
+$$\lambda_{\max}=\frac{(a+d)+\sqrt{(a-d)^2+4bc}}{2}$$
+
+Plugging in values for Pemic:
+$$a{=}3.1$$ $$b{=}42.9$$ $$c{=}4.7667$$ $$d{=}25.0$$
+$$\lambda_{\max}\approx 32.061$$
+
+Doing the same for Uenza:
+$$a{=}3.0$$ $$b{=}42.25$$ $$c{=}5.07$$ $$d{=}25.1$$
+$$\lambda_{\max}\approx 32.389$$.
+
+Therefore:
+$$\dfrac{R_{0:\text{Pemic}}}{R_{0:\text{Uenza}}}\approx \dfrac{32.061}{32.389}\approx 0.990$$
+
+So the two $R_0$ values are very close to each other. They only differ by about 1\%.
+\end{solution}
 
 \end{enumerate}
 
