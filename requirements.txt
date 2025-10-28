@@ -1,3 +1,5 @@
 numpy
 matplotlib
 networkx
+pandas
+scipy

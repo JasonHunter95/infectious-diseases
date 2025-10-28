@@ -95,14 +95,30 @@ Consider a population with four equal-sized groups, numbered $1, 2, 3, 4$. Suppo
 		\begin{solution}
 			\href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW3/homework_3.ipynb} {My code for this graph}
 			\begin{center}
-				\includegraphics[width=0.7\textwidth]{fourgroups.png}
+				\includegraphics[width=0.7\textwidth]{fourgroups_I.png}
 			\end{center}
 		\end{solution}
 	\item Define the average relative susceptibility among the susceptibles at any point in time $\bar{p}(t)$ as
 %	$$\bar{p}(t) = \frac{\displaystyle \sum_{i=1}^4 p_i\,s_i(t)}{\displaystyle \sum_{i=1}^4 s_i(t)}\ .$$
 	$$\bar{p}(t) = \displaystyle \sum_{i=1}^4 p_i\,s_i(t) \Bigg / \displaystyle \sum_{i=1}^4 s_i(t)\ .$$
 	Note that this is simply a weighted average of the susceptibilities of the susceptibles, by adding up the susceptibilities in the numerator and dividing by the number of susceptibles in the denominator. Over the same time window as your previous plot, create two addition figures: First, show $s_i(t)$ for each $i=1, 2, 3, 4$ using the same color scheme as before. Second, show $\bar{p}(t)$ in black. 
+		\begin{solution}
+			\href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW3/homework_3.ipynb} {My code for these graphs}
+			\begin{center}
+				\includegraphics[width=0.7\textwidth]{fourgroups_S.png}
+				\includegraphics[width=0.7\textwidth]{fourgroups_pbar.png}
+			\end{center}
+		\end{solution}
 	\item Comment on what you observe in the plots, and explain the reason for the patterns in words that a high school student could understand.
+		\begin{solution}
+			In the first plot, we can see that the most susceptible group (group 4) has the highest peak of infections, followed by group 3, group 2, and finally group 1 with the lowest peak. This is because the more susceptible members there are in a group, its more likely that its members will get infected when exposed to the virus. This causes the outbreak to be larger.
+
+			For the second plot, we can see that the susceptible populations for each group decrease over time as individuals become infected. The most susceptible group (group 4) sees the fastest decline in susceptibles, while the least susceptible group (group 1) declines more slowly. This is because individuals in highly susceptible groups are more likely to get infected early, leading to the varying rates of decline in susceptible populations across the different groups.
+
+			The third plot shows the average relative susceptibility among the susceptibles over time. This value starts out high because all groups are fully susceptible at first. Then as the epidemic progresses and more people from the highly susceptible groups get infected, the average susceptibility among those who remain susceptible decreases.
+
+			All of these graphs display how different levels of susceptibility in a population can lead to varying dynamics during an outbreak. More susceptible groups experience larger outbreaks and faster depletion of susceptibles, which changes the overall susceptibility of the remaining population.
+		\end{solution}
 	\item[Grad/EC] Reflect on these plots in the context of the COVID-19 pandemic. What lessons are there to be drawn from the relationship between an epidemic wave and different groups with different susceptibilities?
 \end{enumerate}
 \clearpage
@@ -117,7 +133,27 @@ Note: You can find Python code to draw from a negative binomial with the $R_0$ a
 
 \begin{enumerate}[label=\alph*.]
 	\item Write code for a branching process that, starting from a single infection, draws $G$ generations, with each infection creating $NB(R_0,k)$ additional infections. Use your code to estimate $q$ the probability\footnote{See class notes.} that an epidemic dies in finite time, for $R_0=3$ and $k=0.1, 0.5, 1.0, 5.0,$ and $10.0$.\footnote{Hint: When we estimate a probability from a stochastic process like this, a convenient way to do this is Monte Carlo: simulate, say, $100,000$ branching processes and take note of how many cease before growing large.} Provide your answers in a table, out to 3 decimal places.
+		\begin{solution}
+			\href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW3/homework_3.ipynb} {My code for these simulations}
+			\begin{center}
+				\begin{tabular}{r|r}
+				$k$ & $q$ \\
+				\hline
+				0.1 & 0.838 \\
+				0.5 & 0.500 \\
+				1.0 & 0.333 \\
+				5.0 & 0.120 \\
+				10.0 & 0.089 \\
+				\end{tabular}
+			\end{center}
+		\end{solution}
 	\item How does $k$ affect $q$? Explain what this means in terms of the relationship between $p$ (i.e., $1-q$) and superspreading. 
+		\begin{solution}
+			The smaller $k$ gets, the larger $q$ grows. So the smaller $k$ (the more superspreading potential there is), the more likely an outbreak is to die out in finite time $q$. 
+			So when an epidemic has greater superspreading potential, it is more probable that the outbreak will die out before getting too large. Intuitively, when there is more variation in the number of secondary infections, as is the case in superspreading scenarios, there is more of a possibility that a single individual will infect no one at all, resulting in a dying epidemic.
+			Equivalently, $p = 1 - q$ decreases as $k$ decreases, meaning that the probability of an outbreak growing indefinitely is lower when there is more superspreading potential.
+			If $q$ is large and bounded by $1$, then the probability of the outbreak growing $p$ gets smaller as $q$ approaches $1$.
+		\end{solution}
 	\item [Grad/EC] How large do finite outbreaks get before they die out? For the parameters above, and for only the {\it finite} outbreaks, plot a histogram of $100,000$ finite outbreaks for your choice or choices of $k$, and $R_0=3$. What do you observe? 
 \end{enumerate}
 
