@@ -40,20 +40,17 @@
 
 \lhead{{\bf Mathematical \& Computational Modeling of Infectious Diseases \\ 
 Homework 4}}
-\rhead{{\bf D.B. Larremore \\ 2025}}
+\rhead{{\bf Jason Hunter \\ 2025}}
 \renewcommand{\headrulewidth}{0.4pt}
 
 {\bf Instructions:} 
 \begin{itemize}[itemsep=-7pt]
-	\item Please turn in a single PDF file. 
-	\item Please share a link to your code, but do not attach the actual code. 
-	\item Handwritten math (scanned and included in a PDF) is fine, but please watch out for 10MB+ file sizes!
+	\item \href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW4/homework_4.ipynb} {Code for Homework 4}
 \end{itemize}
 \vspace{0.1in}\hrule
 
 \begin{enumerate}
 	\item The goal of this problem is to try out some of the methods we developed in class to estimate $R_0$ or $R_t$ from data. You'll also have a chance to refresh yourself on confidence intervals. 
-	
 	{\bf What we know about Bison/Ralphie Unexplained Hiccups disease:}
 	\begin{itemize}[itemsep=-5pt]
 	\item BRUH disease affects bison like Ralphie.
@@ -83,7 +80,6 @@ Homework 4}}
 	In the process, look up the 95\% confidence interval associated with estimating a slope from data points, and use the slope's confidence interval to provide a confidence interval for your $R_0$ estimate.
 
 		\begin{solution}
-		\href{https://github.com/JasonHunter95/infectious-diseases/blob/main/HW4/homework_4.ipynb} {Code for Homework 4}
 		We can estimate $R_0$ from epidemic growth data. Under the SIR model with natural death rate $\mu$, we have the equation:
 		$$ \dot{I} = \beta \frac{SI}{N} - (\gamma + \mu) I$$ 
 		At the beginning of an epidemic, when $S \approx N$, this can be simplified to:
@@ -190,12 +186,12 @@ Suppose we've got a diagnostic with sensitivity $0.90$ and specificity $0.98$.
 	\item Write down a 95\% confidence interval for your corrected estimate. 
 	
 	\begin{solution} \\
-	To get a 95\% confidence interval for the corrected prevalence estimate, we first need to get a confidence interval for the given prevalence estimate. \\
+	To get a 95\% confidence interval for the corrected prevalence estimate, we first need to get a CI for the given prevalence estimate. \\
 	Using the standard error for a proportion:
 	$$ SE = \sqrt{\frac{0.39(1 - 0.39)}{100}} = 0.0487 $$
-	Using this, we can get a 95\% confidence interval for the given prevalence:
+	Using this, we can get a CI for the given prevalence:
 	$$ 0.39 \pm 1.96 \times 0.0487 = (0.294, \,0.486) $$
-	From here, we can get a confidence interval for the corrected prevalence by solving for $\theta$ at the bounds of the given prevalence CI:
+	From here, we can get another CI for the corrected prevalence by solving for $\theta$ at the bounds of the given prevalence CI:
 	\begin{align*}
 	\text{Lower bound: } & 0.90 (\theta) + (1 - \theta)(0.02) = 0.294 \\
 	& 0.88 (\theta) = 0.274 \\
@@ -219,7 +215,7 @@ Suppose we've got a diagnostic with sensitivity $0.90$ and specificity $0.98$.
 		To get a 95\% confidence interval for the corrected prevalence estimate, we first need to get a confidence interval for the given prevalence estimate. \\
 		Using the standard error for a proportion:
 		$$ SE = \sqrt{\frac{0.36(1 - 0.36)}{50}} = 0.0679 $$
-		Using this, we can get a 95\% confidence interval for the given prevalence:
+		Using this, we can get a 95\% CI for the given prevalence:
 		$$ 0.36 \pm 1.96 \times 0.0679 = (0.227, \,0.493) $$
 		From here, we can get a confidence interval for the corrected prevalence by solving for $\theta$ at the bounds of the given prevalence CI:
 		\begin{align*}
@@ -230,7 +226,7 @@ Suppose we've got a diagnostic with sensitivity $0.90$ and specificity $0.98$.
 		& 0.88 (\theta) = 0.473 \\
 		& \theta = 0.5375 \\
 		\end{align*}
-		So the 95\% confidence interval for the corrected prevalence estimate is approximately $(23.52\%, \,53.75\%)$.
+		So the 95\% CI for the corrected prevalence estimate is approximately $(23.52\%, \,53.75\%)$.
 	\end{solution}
 
 	\item Pool Burt's and Maria's data to get a third estimate of prevalence, and update your 95\% confidence interval. How are your three estimates related? And, how are the widths of the three confidence intervals related? 
